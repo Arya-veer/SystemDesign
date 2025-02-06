@@ -1,0 +1,24 @@
+NEED: 
+    Single hash table uses MOD n operation over hashed values to search for keys
+    In a distributed system, n changes unexpectedly i.e. some node goes down, or new server is required
+    In such cases, all the nodes are required to rehashed and restored. This is a very expensive operation
+
+SOLUTION:
+    Imagine a ring, place all your nodes on that ring, assume symmetry
+    so load on each node(server) is (1/n)th, now we add a new node, so now we need to move at most (1/n) of data
+
+    DATA STRUCTURE:
+        It is clear that for each data point we choose, we need to find the successor of that data point,
+        because that data point will go to the successor node server. This can be implemented using BSTs
+        but BSTs can be skewed. So we need to use a balanced BST, which is a Red-Black tree.
+
+        Now we have successor of each data point efficiently
+
+    ASSYMETRICAL NODE PLACEMENT:
+        Even when we randomly place nodes on the ring, it is quite possible that some nodes are placed closer to each other
+        and thus the load is not evenly balanced. To solve this problem, we create some-k virtual instances of each node
+        keep k around log(n)
+
+IMPLEMENTATION:
+    See code for implementation details
+
